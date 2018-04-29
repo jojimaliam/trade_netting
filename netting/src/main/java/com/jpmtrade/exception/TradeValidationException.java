@@ -1,4 +1,4 @@
-package com.jpmtrade.Exception;
+package com.jpmtrade.exception;
 
 public class TradeValidationException extends TradeException{
 	

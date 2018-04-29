@@ -2,7 +2,7 @@ package com.jpmtrade.model;
 
 import static com.jpmtrade.constants.Constants.PIPE;
 
-import com.jpmtrade.Exception.TradeValidationException;
+import com.jpmtrade.exception.TradeValidationException;
 
 public class Trade {
 	private Integer tradeId;

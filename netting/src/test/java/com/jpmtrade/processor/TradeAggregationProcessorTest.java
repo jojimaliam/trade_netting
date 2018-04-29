@@ -148,6 +148,8 @@ public class TradeAggregationProcessorTest {
 		verifyPosition(tradeAggPrcr, "ACC-8877|JKL|-100|1025");
 
 	}
+	
+	
 
 	private void verifyPosition(TradeAggregationProcessor builder, String string) {
 		String[] split = string.split("\\|");

@@ -11,12 +11,32 @@ import com.jpmtrade.model.TradeRealtimePosition;
 
 public class TradeContainerImpl implements TradeContainer {
 
-	private final Map<Integer, Trade> trades = new HashMap();
-	private final Map<TradeAggregatedPositionKey, TradeRealtimePosition> tradePositions = new HashMap();
+	private final Map<Integer, Trade> trades ;
+	private final Map<TradeAggregatedPositionKey, TradeRealtimePosition> tradePositions ;
+
+	private static TradeContainer container;
+	
+	private TradeContainerImpl(){
+		 trades = new HashMap();
+		 tradePositions = new HashMap();
+	}
+	
 
 	@Override
 	public void addTrade(Trade trade) {
 		trades.put(trade.getTradeId(), trade);
+	}
+	
+	public static TradeContainer getInstance() {
+		if (null == container) {
+			synchronized (TradeContainerImpl.class) {
+				if (null == container) {
+					container = new TradeContainerImpl();
+				}
+
+			}
+		}
+		return container;
 	}
 
 	@Override

@@ -3,6 +3,8 @@ package com.jpmtrade.processor;
 import static com.jpmtrade.constants.Constants.TRADE_EXISTS;
 import static com.jpmtrade.constants.Constants.TRADE_NEW;
 
+import org.apache.log4j.Logger;
+
 import com.jpmtrade.container.TradeContainer;
 import com.jpmtrade.container.TradeContainerImpl;
 import com.jpmtrade.model.Trade;
@@ -10,11 +12,12 @@ import com.jpmtrade.model.TradeRealtimePosition;
 import com.jpmtrade.util.TradeCalculatorFactory;
 
 public class TradeAggregationProcessor {
-	private final TradeContainer container = new TradeContainerImpl();
+	private TradeContainer container;
+	final static Logger logger = Logger.getLogger(TradeAggregationProcessor.class);
 
 	public void processTrade(Trade newTrade) {
 		try {
-			
+			container =TradeContainerImpl.getInstance();
 			newTrade.validate();
 			TradeRealtimePosition position = container.getPositionByTrade(newTrade);
 			if (null == position) {
@@ -39,7 +42,7 @@ public class TradeAggregationProcessor {
 
 		} catch (Exception ex) {
          
-			System.out.println(ex.getMessage());
+			logger.error(ex.getMessage(), ex);
 		}
 	}
 
